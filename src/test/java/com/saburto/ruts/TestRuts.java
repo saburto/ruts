@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 public class TestRuts {
 
   @Test
-  void example() {
+  void parseSimpleRut() {
     Rut rut = Ruts.parse("1-9");
     assertThat(rut.getNumber()).isEqualTo(1);
     assertThat(rut.getCheckDigit()).isEqualTo("9");
