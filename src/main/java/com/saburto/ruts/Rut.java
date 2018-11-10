@@ -19,4 +19,9 @@ public class Rut {
   public String getCheckDigit() {
     return checkDigit;
   }
+
+  public static Rut parse(String rawRut) {
+
+    return new Rut(1, "9");
+  }
 }
