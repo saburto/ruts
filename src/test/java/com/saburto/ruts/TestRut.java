@@ -14,23 +14,23 @@ public class TestRut {
 
   @Test
   void parseSimpleRutWithK() {
-    Rut rut = Rut.parse("1-k");
-    assertThat(rut.getNumber()).isEqualTo(1);
+    Rut rut = Rut.parse("23-k");
+    assertThat(rut.getNumber()).isEqualTo(23);
     assertThat(rut.getCheckDigit()).isEqualTo("k");
   }
 
   @Test
   void parseLargeRut() {
-    Rut rut = Rut.parse("1100001000-9");
+    Rut rut = Rut.parse("1100001000-8");
     assertThat(rut.getNumber()).isEqualTo(1_100_001_000);
-    assertThat(rut.getCheckDigit()).isEqualTo("9");
+    assertThat(rut.getCheckDigit()).isEqualTo("8");
   }
 
   @Test
   void parseLargeRutWhitThousandSeparators() {
-    Rut rut = Rut.parse("1.100.001.000-9");
+    Rut rut = Rut.parse("1.100.001.000-8");
     assertThat(rut.getNumber()).isEqualTo(1_100_001_000);
-    assertThat(rut.getCheckDigit()).isEqualTo("9");
+    assertThat(rut.getCheckDigit()).isEqualTo("8");
   }
 
   @Test
@@ -55,5 +55,20 @@ public class TestRut {
       .isThrownBy( () -> Rut.parse("1-q"))
       .withMessageContaining("1-q")
       .withNoCause();
+  }
+
+  @Test
+  void parseInvalidRut() {
+    assertThatExceptionOfType(IllegalArgumentException.class)
+      .isThrownBy( () -> Rut.parse("30.686.957-5"))
+      .withMessageContaining("30.686.957-5")
+      .withNoCause();
+  }
+
+  @Test
+  void parseValidRut() {
+    Rut rut = Rut.parse("30.686.957-4");
+    assertThat(rut.getNumber()).isEqualTo(30_686_957);
+    assertThat(rut.getCheckDigit()).isEqualTo("4");
   }
 }
