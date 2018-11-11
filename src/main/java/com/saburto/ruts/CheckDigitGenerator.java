@@ -38,7 +38,7 @@ public class CheckDigitGenerator {
     }
   }
 
-  private static String transform(int mod) {
+  private String transform(int mod) {
     switch (mod) {
     case 11:
       return "0";
