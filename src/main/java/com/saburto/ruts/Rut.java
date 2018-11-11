@@ -57,17 +57,10 @@ public class Rut {
 
     int number = v.intValue();
 
-    Iterator<Integer> seq = cycleIterator(IntStream.range(2, 8).toArray());
+    CheckDigitGenerator CheckDigitGenerator = new CheckDigitGenerator();
+    String rightCheckDigit = CheckDigitGenerator.fromNumber(number);
 
-    int sum = IntStream.iterate(number, n -> n / 10)
-      .limit(numberString.length())
-      .map(n -> n % 10)
-      .map(n -> n* seq.next())
-      .sum();
-
-    int mod = 11 - (sum % 11);
-
-    if(!checkDigitFrom(mod).equalsIgnoreCase(checkDigit)) {
+    if(!rightCheckDigit.equalsIgnoreCase(checkDigit)) {
       throwInvalidExeption(rawRut);
     }
 
@@ -78,33 +71,4 @@ public class Rut {
     throw new IllegalArgumentException(String.format("Invalid RUT [%s]", rawRut));
   }
 
-  private static Iterator<Integer> cycleIterator(int[] range) {
-    return new Iterator<Integer>() {
-
-      int index = 0;
-
-      @Override
-      public boolean hasNext() {
-        return true;
-      }
-
-      @Override
-      public Integer next() {
-        if(index == range.length) {
-          index = 0;
-        }
-
-        return range[index++];
-      }
-
-    };
-  }
-
-  private static String checkDigitFrom(int mod) {
-    switch (mod) {
-      case 11: return "0";
-      case 10: return "k";
-      default: return String.valueOf(mod);
-    }
-  }
 }
