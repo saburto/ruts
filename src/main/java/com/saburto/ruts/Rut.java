@@ -23,6 +23,14 @@ public class Rut {
     return checkDigit;
   }
 
+  public static Rut parseValid(String rawRut) {
+    Rut rut = parse(rawRut);
+    if (!rut.isValid()) {
+      throw new IllegalArgumentException(String.format("Invalid RUT [%s]", rawRut));
+    }
+    return rut;
+  }
+
   public static Rut parse(String rawRut) {
     Objects.requireNonNull(rawRut, "raw rut must not be null");
 
@@ -30,18 +38,15 @@ public class Rut {
     int number = valueExtractor.getNumber();
     String checkDigit = valueExtractor.getCheckDigit();
 
-    CheckDigitGenerator checkDigitGenerator = new CheckDigitGenerator();
-    String rightCheckDigit = checkDigitGenerator.fromNumber(number);
-
-    if(!rightCheckDigit.equalsIgnoreCase(checkDigit)) {
-      throwInvalidExeption(rawRut);
-    }
-
     return new Rut(number, checkDigit);
   }
 
-  private static void throwInvalidExeption(String rawRut) {
-    throw new IllegalArgumentException(String.format("Invalid RUT [%s]", rawRut));
+  public boolean isValid() {
+
+    CheckDigitGenerator checkDigitGenerator = new CheckDigitGenerator();
+    String rightCheckDigit = checkDigitGenerator.fromNumber(number);
+
+    return rightCheckDigit.equalsIgnoreCase(checkDigit);
   }
 
 }
