@@ -2,6 +2,19 @@ plugins {
     id 'java-library'
 }
 
+group = 'com.saburto'
+version = '1.0.0-SNAPSHOT'
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
 dependencies {
     testCompile('org.junit.jupiter:junit-jupiter-api:5.3.1')
     testCompile('org.junit.jupiter:junit-jupiter-params:5.3.1')
@@ -18,4 +31,10 @@ test {
 
 repositories {
     jcenter()
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
 }
