@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class TestRut {
 
   @Nested
@@ -46,4 +49,40 @@ public class TestRut {
     }
   }
 
+  @Test
+  void rutInHashSetNoDuplicate() {
+    Set<Rut> rutSet = new HashSet<>();
+    Rut rut1 = new Rut(1, "1");
+    Rut rut2 = new Rut(1, "1");
+    Rut rut3 = new Rut(1, "2");
+    rutSet.add(rut1);
+    rutSet.add(rut2);
+    rutSet.add(rut3);
+
+    assertThat(rutSet).hasSize(2);
+  }
+
+  @Test
+  void rutWithSameNumberAndCheckdigitAreEquals() {
+    Rut rut1 = new Rut(1, "1");
+    Rut rut2 = new Rut(1, "1");
+
+    assertThat(rut1.equals(rut2)).isTrue();
+  }
+
+  @Test
+  void rutWithSameNumberAndCheckdigitDifferentCaseAreEquals() {
+    Rut rut1 = new Rut(1, "k");
+    Rut rut2 = new Rut(1, "K");
+
+    assertThat(rut1.equals(rut2)).isTrue();
+  }
+
+  @Test
+  void rutWithSameNumberAndCheckdigitDifferentAreNotEquals() {
+    Rut rut1 = new Rut(1, "k");
+    Rut rut2 = new Rut(1, "5");
+
+    assertThat(rut1.equals(rut2)).isFalse();
+  }
 }

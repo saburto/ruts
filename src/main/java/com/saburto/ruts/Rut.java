@@ -2,6 +2,7 @@ package com.saburto.ruts;
 
 import static com.saburto.ruts.CheckDigitGenerator.fromNumber;
 import static com.saburto.ruts.ValueExtractor.extract;
+import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -32,5 +33,20 @@ public class Rut {
   public static Rut parse(String rawRut) {
     requireNonNull(rawRut, "raw rut must not be null");
     return extract(rawRut, Rut::new);
+  }
+
+  @Override
+  public int hashCode() {
+    return hash(number, checkDigit);
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if(other instanceof Rut) {
+      Rut otherRut = (Rut) other;
+      return number == otherRut.number &&
+        checkDigit.equalsIgnoreCase(otherRut.checkDigit);
+    }
+    return false;
   }
 }
