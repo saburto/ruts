@@ -2,6 +2,7 @@ package com.saburto.ruts;
 
 import static com.saburto.ruts.CheckDigitGenerator.fromNumber;
 import static com.saburto.ruts.ValueExtractor.extract;
+import static com.saburto.ruts.ValueExtractor.LOCALE_ESCL;
 import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 
@@ -56,6 +57,11 @@ public class Rut implements Comparable<Rut>, Serializable {
       return checkDigit.compareTo(o.checkDigit);
     }
     return numberCompare;
+  }
+
+  @Override
+  public String toString() {
+    return String.format(LOCALE_ESCL, "%,d-%s", number, checkDigit);
   }
 
   public static Rut parse(String rawRut) {

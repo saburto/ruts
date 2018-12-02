@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 
 class ValueExtractor {
 
+  public static final Locale LOCALE_ESCL = new Locale("es", "CL");
   private static final String PATTERN = "^(?<number>[\\d]{1,3}(\\.[\\d]{3})*|\\d+)-(?<check>[\\dkK]{1})$";
   private static final Pattern FORMAT_PATTERN = Pattern.compile(PATTERN);
-  private static final Locale LOCALE_ESCL = new Locale("es", "CL");
 
   private ValueExtractor() {
   }

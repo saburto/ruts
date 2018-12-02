@@ -129,4 +129,13 @@ public class TestRut {
 
     assertThat(serialized).isEqualTo(rut);
   }
+
+  @Test
+  void rutToString() {
+    assertThat(new Rut(123, "1").toString()).isEqualTo("123-1");
+    assertThat(new Rut(123123, "1").toString()).isEqualTo("123.123-1");
+    assertThat(new Rut(10123123, "1").toString()).isEqualTo("10.123.123-1");
+    assertThat(new Rut(10123123, "k").toString()).isEqualTo("10.123.123-k");
+    assertThat(new Rut(10123123, "K").toString()).isEqualTo("10.123.123-K");
+  }
 }
