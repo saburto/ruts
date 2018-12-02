@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -104,5 +109,24 @@ public class TestRut {
       .collect(Collectors.toList());
 
     assertThat(ruts).containsExactly(rut1, rut2, rut3, rut4, rut5);
+  }
+
+  @Test
+  void serializeRut() throws IOException, ClassNotFoundException {
+    Rut rut = new Rut(1, "k");
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    ObjectOutputStream out = new ObjectOutputStream(output);
+    out.writeObject(rut);
+    output.close();
+
+    byte[] bytes = output.toByteArray();
+
+    ByteArrayInputStream input = new ByteArrayInputStream(bytes);
+    ObjectInputStream in = new ObjectInputStream(input);
+    Rut serialized = (Rut) in.readObject();
+    in.close();
+    input.close();
+
+    assertThat(serialized).isEqualTo(rut);
   }
 }

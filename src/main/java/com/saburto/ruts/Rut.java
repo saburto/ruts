@@ -5,10 +5,14 @@ import static com.saburto.ruts.ValueExtractor.extract;
 import static java.util.Objects.hash;
 import static java.util.Objects.requireNonNull;
 
+import java.io.Serializable;
+
 /**
  * TODO Add javadoc
  */
-public class Rut implements Comparable<Rut> {
+public class Rut implements Comparable<Rut>, Serializable {
+
+  private static final long serialVersionUID = -4653487574897221420L;
 
   private final int number;
   private final String checkDigit;
@@ -30,11 +34,6 @@ public class Rut implements Comparable<Rut> {
     return fromNumber(number).equalsIgnoreCase(checkDigit);
   }
 
-  public static Rut parse(String rawRut) {
-    requireNonNull(rawRut, "raw rut must not be null");
-    return extract(rawRut, Rut::new);
-  }
-
   @Override
   public int hashCode() {
     return hash(number, checkDigit);
@@ -42,7 +41,7 @@ public class Rut implements Comparable<Rut> {
 
   @Override
   public boolean equals(Object other) {
-    if(other instanceof Rut) {
+    if (other instanceof Rut) {
       Rut otherRut = (Rut) other;
       return number == otherRut.number &&
         checkDigit.equalsIgnoreCase(otherRut.checkDigit);
@@ -57,5 +56,10 @@ public class Rut implements Comparable<Rut> {
       return checkDigit.compareTo(o.checkDigit);
     }
     return numberCompare;
+  }
+
+  public static Rut parse(String rawRut) {
+    requireNonNull(rawRut, "raw rut must not be null");
+    return extract(rawRut, Rut::new);
   }
 }
