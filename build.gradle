@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
 }
 
 group = 'com.saburto'
@@ -31,6 +32,39 @@ test {
 
 repositories {
     jcenter()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'ruts'
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            pom {
+                name = 'Ruts'
+                description = 'Simple java library to manage RUT as value object'
+                url = 'https://github.com/saburto/ruts'
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url = 'https://github.com/saburto/ruts/blob/master/LICENSE'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/saburto/ruts'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = "$buildDir/repos/releases"
+            def snapshotsRepoUrl = "$buildDir/repos/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
 }
 
 javadoc {

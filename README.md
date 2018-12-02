@@ -16,6 +16,27 @@ Simple java library to manage [RUT](https://en.wikipedia.org/wiki/National_ident
 
 This library is only compatible with Java version 8 or newer
 
+Gradle
+
+```
+compile "com.saburto:ruts:1.0.0-SNAPSHOT"
+
+```
+
+Maven
+
+```
+<dependency>
+    <groupId>com.saburto</groupId>
+    <artifactId>ruts</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>
+
+```
+
+
+Code example:
+
 ```java
 Rut rut = Rut.parse("124.123-4"); // parse from String
 new Rut(1234, "k"); // constructor by integer and string
