@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * TODO Add javadoc
  */
-public class Rut {
+public class Rut implements Comparable<Rut> {
 
   private final int number;
   private final String checkDigit;
@@ -48,5 +48,14 @@ public class Rut {
         checkDigit.equalsIgnoreCase(otherRut.checkDigit);
     }
     return false;
+  }
+
+  @Override
+  public int compareTo(Rut o) {
+    int numberCompare = Integer.compare(number, o.number);
+    if (numberCompare == 0) {
+      return checkDigit.compareTo(o.checkDigit);
+    }
+    return numberCompare;
   }
 }

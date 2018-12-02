@@ -4,8 +4,12 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class TestRut {
 
@@ -84,5 +88,21 @@ public class TestRut {
     Rut rut2 = new Rut(1, "5");
 
     assertThat(rut1.equals(rut2)).isFalse();
+  }
+
+  @Test
+  void listOfRutSorted() {
+    Rut rut1 = new Rut(1, "k");
+    Rut rut2 = new Rut(2, "5");
+    Rut rut3 = new Rut(3, "6");
+    Rut rut4 = new Rut(5, "6");
+    Rut rut5 = new Rut(5, "7");
+
+    List<Rut> ruts = Arrays.asList(rut1, rut2, rut3, rut4, rut5)
+      .stream()
+      .sorted()
+      .collect(Collectors.toList());
+
+    assertThat(ruts).containsExactly(rut1, rut2, rut3, rut4, rut5);
   }
 }
