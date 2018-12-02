@@ -5,7 +5,10 @@ import java.util.stream.IntStream;
 
 public class CheckDigitGenerator {
 
-  public String fromNumber(int number) {
+  private CheckDigitGenerator() {
+  }
+
+  public static String fromNumber(int number) {
 
     Iterator<Integer> seq = new SequenceIterator();
 
@@ -38,7 +41,7 @@ public class CheckDigitGenerator {
     }
   }
 
-  private String transform(int mod) {
+  private static String transform(int mod) {
     switch (mod) {
     case 11:
       return "0";
