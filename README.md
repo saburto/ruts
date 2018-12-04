@@ -11,15 +11,18 @@ Simple java library to manage [RUT](https://en.wikipedia.org/wiki/National_ident
 * Implements comparable interfaces, list of `rut` is sortable.
 * Implements `hashcode` and `equals,` the rut object could be used as a key on a Hashmap or HashSet collections.
 * Implements `toString` method, return format "123.123-1"
+* Published on maven central
 
 ## How to use it?
 
 This library is only compatible with Java version 8 or newer
 
+Already published on maven central
+
 Gradle
 
 ```
-compile "com.saburto:ruts:1.0.0-SNAPSHOT"
+compile "com.saburto:ruts:1.0.0"
 
 ```
 
@@ -29,7 +32,7 @@ Maven
 <dependency>
     <groupId>com.saburto</groupId>
     <artifactId>ruts</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 
 ```
