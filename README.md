@@ -1,6 +1,8 @@
 # Ruts
 
-Simple java library to manage [RUT](https://en.wikipedia.org/wiki/National_identification_number#Chile) as value object
+[![Build Status](https://travis-ci.org/saburto/ruts.svg?branch=master)](https://travis-ci.org/saburto/ruts)
+
+Simple java library to manage [RUT](https://en.wikipedia.org/wiki/National_identification_number#Chile) as value object. 
 
 ## Features
 
