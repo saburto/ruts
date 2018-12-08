@@ -24,7 +24,7 @@ Already published on maven central
 Gradle
 
 ```
-compile "com.saburto:ruts:1.0.0"
+compile "com.saburto:ruts:1.0.1"
 
 ```
 
@@ -34,7 +34,7 @@ Maven
 <dependency>
     <groupId>com.saburto</groupId>
     <artifactId>ruts</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 
 ```
